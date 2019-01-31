@@ -8,17 +8,17 @@
 </ul>
 
 <p float="left">
-  <img src="/SupportVectorMachinesCustomLibraryLinearHardMargin.png" width="400" alt="Cost of algorithm improvement through epochs."/>
-  <img src="/SupportVectorMachinesSklearnLibraryLinearHardMargin.png width="460"alt="Shape of the hyperplane as cost from algorithm improves through epochs."/>
+  <img src="/SupportVectorMachinesCustomLibraryLinearHardMargin.png" width="400" alt="Linear SVM hard margin. Using custom library."/>
+  <img src="/SupportVectorMachinesSklearnLibraryLinearHardMargin.png width="460"alt="Linear SVM hard margin. Using SKLearn."/>
   
-  <img src="/SupportVectorMachinesCustomLibraryLinearSoftMargin.png" width="400" alt="Cost of algorithm improvement through epochs."/>
-  <img src="/SupportVectorMachinesSklearnLibraryLinearSoftMargin.png width="460"alt="Shape of the hyperplane as cost from algorithm improves through epochs."/>
+  <img src="/SupportVectorMachinesCustomLibraryLinearSoftMargin.png" width="400" alt="Linear SVM soft margin."/>
+  <img src="/SupportVectorMachinesSklearnLibraryLinearSoftMargin.png width="460"alt="Linear SVM soft margin."/>
   
-  <img src="/SupportVectorMachinesCustomLibraryPolynomial.png" width="400" alt="Cost of algorithm improvement through epochs."/>
-  <img src="/SupportVectorMachinesSklearnLibraryPolynomialMargin.png width="460"alt="Shape of the hyperplane as cost from algorithm improves through epochs."/>
+  <img src="/SupportVectorMachinesCustomLibraryPolynomial.png" width="400" alt="Polynomial SVM. Custom library."/>
+  <img src="/SupportVectorMachinesSklearnLibraryPolynomialMargin.png width="460"alt="Polynomial SVM. Using SKLearn."/>
 
-  <img src="/SupportVectorMachinesCustomLibraryGaussianMargin.png" width="400" alt="Cost of algorithm improvement through epochs."/>
-  <img src="/SupportVectorMachinesSklearnLibraryGaussianMargin.png width="460"alt="Shape of the hyperplane as cost from algorithm improves through epochs."/>
+  <img src="/SupportVectorMachinesCustomLibraryGaussianMargin.png" width="400" alt="Gaussian SVM. Custom library."/>
+  <img src="/SupportVectorMachinesSklearnLibraryGaussianMargin.png width="460"alt="Gaussian SVM. Using SKLearn.."/>
 </p>
 
 
