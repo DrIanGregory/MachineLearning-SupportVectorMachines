@@ -1,0 +1,138 @@
+<h2>MachineLearning-Support Vector Machines</h2>
+<h3>Description:</h3>
+<ul style="list-style-type:disc">
+<li>Python script to estimate Support Vector Machines for linear, polynomial and Gaussian kernels utilising quadratic programming optimisation algorithm from library CVXOPT.</li>
+<li>Support Vector Machines implemented from scratch and compared to scikit-learn.</li>
+<li>All estimations using simulated data.</li>
+<li>Linear hard margin fits linearly separable data. Linear soft margin fits linearly separable data with some overlap in class examples. Both Gaussian and polynomial kernels estimate non-linearly separable examples.</li>
+</ul>
+
+
+<p float="left">
+  <img src="/linearRegressionCost.gif" width="400" alt="Cost of algorithm improvement through epochs."/>
+  <img src="/linearRegressionFit.gif" width="460"alt="Shape of the hyperplane as cost from algorithm improves through epochs."/>
+</p>
+
+ 
+<h3>Model</h3>
+Simulate labelled data $\mathcal{D} = \{ (x_{n},y_{n} ) \vert x_n \in \mathcal{R}^k, y_n \in \{ -1,1 \} \}^{N}_{n=1}$ where there are N couples of $(x_i,y_i)$, k is the number (dimension) of x variables.
+<br>
+The Wolfe dual soft margin formula with kernel is given by
+
+\begin{align}
+	\max_{\alpha} \sum^N_{n=1} \alpha_n - \frac{1}{2} \sum^N_{n=1} \sum^N_{m=1} \alpha_n\alpha_m y_n y_m K(x_n \cdot x_m)	\nonumber  \\
+    \text{Subject to } 0 \le \alpha_n \le C, \text{ $\forall$ n=1,..,N.}, 					\nonumber  \\
+    \text{ and } \sum^N_{n=1}\alpha_ny_n=0.  												\nonumber
+\end{align}
+
+Where
+
+
+
+<h4>Linear Kernel</h4>
+$$
+	K(x,x') = x \cdot x'
+$$
+Where x and x' are two vectors.
+
+<h4>Polynomial Kernel</h4>
+$$
+	K(x,x') = (x \cdot x' + C)^d
+$$
+Where C is a constant and d is the degree of the kernel.
+
+<h4>Gaussian Kernel (aka Radial Basis Function (RBF)) </h4>
+$$
+	K(x,x') = e^{(-\gamma \lVert x - x' \rVert^2)},\gamma>0
+$$
+Where $-\gamma$ is a free scalar parameter chosen based on the data and defines the influence of each training example.
+
+
+<h3>CVXOPT Library</h3>
+The CVXOPT library solves the Wolfe dual soft margin constrained optimisation with the following API:
+ 
+\begin{align}
+	\min_x       & \frac{1}{2} \alpha^T P \alpha + q^T \alpha  	\nonumber 	\\
+    \text{s.t. } & G \alpha \preccurlyeq h  						\label{eq:CVXOPTRequiredForm}	\\
+    \text{and  } & A \alpha = b  								\nonumber
+\end{align}
+Note: $\preccurlyeq$ indicates component-wise vector inequalities. It means that each row of the matrix $G\alpha$ represents an inequality that must be satisfied.
+ 
+To use the CVXOPT convex solver API. The Wolfe dual soft margin formula is re-written as follows
+
+\begin{align}
+ 	\min_{\alpha} & \frac{1}{2} \alpha^T (yy^T G) \alpha -1^T \alpha.  \nonumber  \\
+    \text{s.t. } &-\alpha_n  \preccurlyeq 0,					\nonumber  \\
+    \text{and s.t. }    & y \cdot \alpha = 0. 					\nonumber
+\end{align}
+
+Where 
+<br>
+G is a Gram matrix of all possible dot products of vectors $x_n$.
+
+$$
+
+G(x_n,...x_N)=
+  \begin{bmatrix}
+    x_1 \cdot x_1 & x_1 \cdot x_2& \dots & x_1 \cdot x_N 	\\
+    x_2 \cdot x_1 & x_2 \cdot x_2& \dots & x_2 \cdot x_N 	\\
+	\vdots        & \vdots       & \ddots& \vdots 			\\
+	x_N \cdot x_1 & x_N \cdot x_2& \dots & x_N \cdot x_N 	\\
+  \end{bmatrix}
+
+$$
+
+\begin{align}
+	P:&= (yy^T G) \text{ matrix of size $N \times N$.}    									\nonumber\\
+	q:&= -1^T 	\text{ a vector of size $N \times 1$.}										    \nonumber\\
+	G:&= -diag[1] \text{ a diagonal matrix of -1 of size $N\times N$.}   						\nonumber\\
+	h:&= \overrightarrow{0} \text{ a vector of zeros of size $N \times 1$}   					\nonumber\\
+	A:&= y \text{ label vector of size $N \times 1$.}   										\nonumber\\
+	b:&= 0 \text{ a scalar}.
+\end{align}
+
+ 
+<h3>How to use</h3>
+<pre>
+python supportVectorMachines.py
+</pre>
+		
+		
+<h3>Expected Output</h3>
+<pre>
+Estimating kernel: linear
+     pcost       dcost       gap    pres   dres
+ 0: -1.4469e+01 -2.6709e+01  5e+02  2e+01  2e+00
+ 1: -1.6173e+01 -1.1054e+01  1e+02  6e+00  6e-01
+ 2: -2.1081e+01 -1.0259e+01  1e+02  4e+00  3e-01
+ 3: -6.7928e+00 -4.0658e+00  1e+01  4e-01  3e-02
+ 4: -3.1094e+00 -3.4085e+00  9e-01  2e-02  2e-03
+ 5: -3.2416e+00 -3.2970e+00  7e-02  4e-04  4e-05
+ 6: -3.2908e+00 -3.2914e+00  7e-04  4e-06  4e-07
+ 7: -3.2913e+00 -3.2913e+00  7e-06  4e-08  4e-09
+ 8: -3.2913e+00 -3.2913e+00  7e-08  4e-10  4e-11
+ 9: -3.2913e+00 -3.2913e+00  7e-10  4e-12  4e-13
+10: -3.2913e+00 -3.2913e+00  7e-12  4e-14  7e-15
+Optimal solution found.
+============================================================
+        SUPPORT VECTOR MACHINE TERMINATION RESULTS
+============================================================
+               **** In-Sample: ****
+3 support vectors found from 160 examples.
+               **** Predictions: ****
+40 out of 40 predictions correct.
+============================================================
+Finished
+</pre>
+
+<h3>Highlights</h3>
+<ul style="list-style-type:disc">
+<li></li>
+</ul>
+
+<h3>Requirements</h3>
+<p><a href="https://www.python.org/">Python (>2.7)</a>, <a href="http://www.numpy.org/">Numpy</a>,<a href="https://cvxopt.org/">CVXOPT</a>,<a href="https://scikit-learn.org">sklearn</a> and <a href="https://matplotlib.org/">matplotlib</a>.</p>
+ 
+
+
+
