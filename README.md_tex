@@ -91,16 +91,16 @@ samples in the dataset, x is the matrix of training samples, y is the vector of 
 <br>
 The non-zero Lagrange multipliers are the data points which contribute to the formation of the decision boundary.
 <br>
-The hypothesis function <img src="svgs/4dd763dd7876885c2e5131a0b6d62d57.svg" align=middle width=133.02135495pt height=24.65753399999998pt/> is the decision boundary. The hypothesis formula in terms of the Kernel function is given by:</li>
+<p>The hypothesis function <img src="svgs/4dd763dd7876885c2e5131a0b6d62d57.svg" align=middle width=133.02135495pt height=24.65753399999998pt/> is the decision boundary. The hypothesis formula in terms of the Kernel function is given by:</p>
 
 <p align="center"><img src="svgs/554a33df7742aebf76ec7b81f6f3c17a.svg" align=middle width=283.76643075pt height=49.315569599999996pt/></p>
-Where S is the set of support vectors, <img src="svgs/c745b9b57c145ec5577b82542b2df546.svg" align=middle width=10.57650494999999pt height=14.15524440000002pt/> is the Lagrange multiplier, b is the bias term, y is the target from the examples, <img src="svgs/39ae080f4ae6ef7bda6a0ca0c44efc78.svg" align=middle width=32.48865674999999pt height=24.65753399999998pt/> is the Kernel and
+<p>Where S is the set of support vectors, <img src="svgs/c745b9b57c145ec5577b82542b2df546.svg" align=middle width=10.57650494999999pt height=14.15524440000002pt/> is the Lagrange multiplier, b is the bias term, y is the target from the examples, <img src="svgs/39ae080f4ae6ef7bda6a0ca0c44efc78.svg" align=middle width=32.48865674999999pt height=24.65753399999998pt/> is the Kernel and</p>
 
 <p align="center"><img src="svgs/cb555672d4c84c369da09fd80f6811d8.svg" align=middle width=184.7945286pt height=69.0417981pt/></p>
 
 
 <h4>Linear Kernel</h4>
-Applies to linearly separable data. When the constraint C is zero. The data must be completely linearly separable and the decision boundary is referred to as 'hard margin'.
+Applies to linearly separable data in the <img src="svgs/433badc501d4f8a183b14684b47f305e.svg" align=middle width=18.424726649999986pt height=26.76175259999998pt/> space. When the constraint C is zero. The data must be completely linearly separable and the decision boundary is referred to as 'hard margin'.
 <br> 
 When the parameter C is non-zero, the approach allows for some overlap in the data and the decision boundary is referred to as 'soft-margin'.
 
@@ -114,7 +114,7 @@ Where x and x' are two vectors.
 Where C is a constant and d is the degree of the kernel.
 
 <h4>Gaussian Kernel (aka Radial Basis Function (RBF)) </h4>
-<p>Applies to non-linearly separable data in <img src="svgs/7d8f6ef7574d1ebbafb8c1f734d24b6e.svg" align=middle width=24.97726109999999pt height=22.648391699999998pt/>. space.</p?
+<p>Applies to non-linearly separable data in <img src="svgs/7d8f6ef7574d1ebbafb8c1f734d24b6e.svg" align=middle width=24.97726109999999pt height=22.648391699999998pt/>. space.</p>
 <p align="center"><img src="svgs/427b753bc670d106e67a2c8c5e77febf.svg" align=middle width=213.56621055pt height=21.1544223pt/></p>
 <p>Where <img src="svgs/243cf87857232b4de4bc600c26d9d7cb.svg" align=middle width=22.20931349999999pt height=19.1781018pt/> is a free scalar parameter chosen based on the data and defines the influence of each training example.</p>
 
