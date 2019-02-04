@@ -1,51 +1,103 @@
-<h2>MachineLearning-Support Vector Machines</h2>
+<h2>Machine Learning-Support Vector Machines</h2>
 <h3>Description:</h3>
 <ul style="list-style-type:disc">
-<li>Python script to estimate Support Vector Machines for linear, polynomial and Gaussian kernels utilising quadratic programming optimisation algorithm from library CVXOPT.</li>
-<li>Support Vector Machines implemented from scratch and compared to scikit-learn.</li>
-<li>All estimations using simulated data.</li>
-<li>Linear hard margin fits linearly separable data. Linear soft margin fits linearly separable data with some overlap in class examples. Both Gaussian and polynomial kernels estimate non-linearly separable examples.</li>
+<li>A Python script to estimate from scratch Support Vector Machines for linear, polynomial and Gaussian kernels utilising the quadratic programming optimisation algorithm from library CVXOPT.</li>
+<li>Support Vector Machines implemented from scratch and compared to scikit-learn's implementation.</li>
+<li>All labelled examples are simulated data.</li>
+<ul style="list-style-type:disc">
+	<li>Linear hard margin fits linearly separable data. Linear soft margin fits linearly separable data with some overlap in class examples. Both Gaussian and polynomial kernels estimate non-linearly separable examples.</li>
+</ul>
 </ul>
 
 
 <p float="left">
-  <img src="/linearRegressionCost.gif" width="400" alt="Cost of algorithm improvement through epochs."/>
-  <img src="/linearRegressionFit.gif" width="460"alt="Shape of the hyperplane as cost from algorithm improves through epochs."/>
+	<div>
+		<div style="top: 0%;left: 50%;">
+			This Custom Library
+		</div>
+		<img src="/SupportVectorMachinesCustomLibraryLinearHardMargin.png" width="400" alt="Linear SVM hard margin. Using custom library."/>		
+	</div>
+	
+	<div>
+		<div style="top: 0%;left: 50%;">
+			Scikit-Learn Library
+		</div>
+		<img src="/SupportVectorMachinesSklearnLibraryLinearHardMargin.png" width="400"alt="Linear SVM hard margin. Using SKLearn."/>
+	</div>
+	
+  <img src="/SupportVectorMachinesCustomLibraryLinearSoftMargin.png" width="400" alt="Linear SVM soft margin."/>
+  <img src="/SupportVectorMachinesSklearnLibraryLinearSoftMargin.png" width="400"alt="Linear SVM soft margin."/>
+  
+  <img src="/SupportVectorMachinesCustomLibraryPolynomial.png" width="400" alt="Polynomial SVM. Custom library."/>
+  <img src="/SupportVectorMachinesSklearnLibraryPolynomialMargin.png" width="400"alt="Polynomial SVM. Using SKLearn."/>
+
+  <img src="/SupportVectorMachinesCustomLibraryGaussianMargin.png" width="400" alt="Gaussian SVM. Custom library."/>
+  <img src="/SupportVectorMachinesSklearnLibraryGaussianMargin.png" width="400"alt="Gaussian SVM. Using SKLearn."/>
 </p>
 
+
+<h3>Given two classes of labelled examples, we are interested in finding a decision boundary resulting from an appropriate choice of support vectors.</h3>
+ 
  
 <h3>Model</h3>
-Simulate labelled data $\mathcal{D} = \{ (x_{n},y_{n} ) \vert x_n \in \mathcal{R}^k, y_n \in \{ -1,1 \} \}^{N}_{n=1}$ where there are N couples of $(x_i,y_i)$, k is the number (dimension) of x variables.
+<p>Simulate labelled training dataset <img src="svgs/4388ea036963a2791929a7365e301c7a.svg" align=middle width=294.09701144999997pt height=27.91243950000002pt/> where there are N couples of $(x_n,y_n)$ and k is the number (dimension) of x variables.</p>
+<br>
+We are interested in SVM disrimitive analysis by finding the optimum decision boundary resulting from a choice of S support vectors.
+This SVM optimization problem is a constrained convex quadratic optimization problem. 
+Meaning it can be formulated in terms of Lagrange multipliers.
+For the Lagrange multipliers to be applied under constraints, can use the Wolfe Dual Principle which 
+is appropriate as long as the Karush Kuhn Tucker (KKT) conditions are satisfied.
+Further, as this is a convex problem, Slater’s condition tells us that strong duality holds such that the dual and primal optimums give the solution.
+
+A benefit to this dual formulation is that the objective function only depends on the Lagrange multipliers (weights and intercept drop out).
+Further, this formulation will be useful when requiring Kernals for entangled data sets.
+
 <br>
 The Wolfe dual soft margin formula with kernel is given by
 
-\begin{align}
-	\max_{\alpha} \sum^N_{n=1} \alpha_n - \frac{1}{2} \sum^N_{n=1} \sum^N_{m=1} \alpha_n\alpha_m y_n y_m K(x_n \cdot x_m)	\nonumber  \\
-    \text{Subject to } 0 \le \alpha_n \le C, \text{ $\forall$ n=1,..,N.}, 					\nonumber  \\
-    \text{ and } \sum^N_{n=1}\alpha_ny_n=0.  												\nonumber
-\end{align}
+<p align="center"><img src="svgs/0acbd9783d20c53d1e9f750f2665520d.svg" align=middle width=333.89845664999996pt height=131.37932775pt/></p>
 
 Where
+$\alpha$ are the Lagrange multipliers, $K(\cdot)$ is the kernel function, N are the number of training 
+samples in the dataset, x is the matrix of training samples, y is the vector of target values, C is a supplied hyperparameter.
+<br>
+The non-zero Lagrange multipliers are the data points which contribute to the formation of the decision boundary.
+<br>
+The hypothesis function $h(x)\in \{-1,0,+1\}$ is the decision boundary. The hypothesis formula in terms of the Kernel function is given by:</li>
 
+$$
+	h(x_n) = sign \left ( \sum^S_{s=1} \alpha_s y_s K(x_s \cdot x_n) + b  \right )
+$$
+Where S is the set of support vectors, $\alpha$ is the Lagrange multiplier, b is the bias term, y is the target from the examples, $K(\cdot)$ is the Kernel and
+
+\begin{equation}
+\text{sign}=
+\begin{cases}
+   -1 & \text{ if } f(\cdot)<0, \nonumber\\
+   0  & \text{ if } f(\cdot)=0, \nonumber\\
+   1  & \text{ if } f(\cdot)> 0.\nonumber
+\end{cases}
+\end{equation}
 
 
 <h4>Linear Kernel</h4>
-$$
-	K(x,x') = x \cdot x'
-$$
+Applies to linearly separable data. When the constraint C is zero. The data must be completely linearly separable and the decision boundary is referred to as 'hard margin'.
+<br> 
+When the parameter C is non-zero, the approach allows for some overlap in the data and the decision boundary is referred to as 'soft-margin'.
+
+
+<p align="center"><img src="svgs/3229be5d1587352e6b4dddbb725a2468.svg" align=middle width=114.9997167pt height=17.2895712pt/></p>
 Where x and x' are two vectors.
 
 <h4>Polynomial Kernel</h4>
-$$
-	K(x,x') = (x \cdot x' + C)^d
-$$
+Applies to non-linearly separable data in $\mathbb{R}^3$ space.
+<p align="center"><img src="svgs/130c930cf5becce140bc3628f8d6d787.svg" align=middle width=168.4659702pt height=18.88772655pt/></p>
 Where C is a constant and d is the degree of the kernel.
 
 <h4>Gaussian Kernel (aka Radial Basis Function (RBF)) </h4>
-$$
-	K(x,x') = e^{(-\gamma \lVert x - x' \rVert^2)},\gamma>0
-$$
-Where $-\gamma$ is a free scalar parameter chosen based on the data and defines the influence of each training example.
+Applies to non-linearly separable data in $mathbb{R}^\infty$ space.
+<p align="center"><img src="svgs/427b753bc670d106e67a2c8c5e77febf.svg" align=middle width=213.56621055pt height=21.1544223pt/></p>
+<p>Where <img src="svgs/243cf87857232b4de4bc600c26d9d7cb.svg" align=middle width=22.20931349999999pt height=19.1781018pt/> is a free scalar parameter chosen based on the data and defines the influence of each training example.</p>
 
 
 <h3>CVXOPT Library</h3>
@@ -53,39 +105,25 @@ The CVXOPT library solves the Wolfe dual soft margin constrained optimisation wi
  
 \begin{align}
 	\min_x       & \frac{1}{2} \alpha^T P \alpha + q^T \alpha  	\nonumber 	\\
-    \text{s.t. } & G \alpha \preccurlyeq h  						\label{eq:CVXOPTRequiredForm}	\\
+    \text{s.t. } & \mathcal{G} \alpha \preccurlyeq h  						\label{eq:CVXOPTRequiredForm}	\\
     \text{and  } & A \alpha = b  								\nonumber
 \end{align}
-Note: $\preccurlyeq$ indicates component-wise vector inequalities. It means that each row of the matrix $G\alpha$ represents an inequality that must be satisfied.
+<p>Note: <img src="svgs/ceddacf03a28d83100c38150c1076c1f.svg" align=middle width=12.785434199999989pt height=20.931464400000007pt/> indicates component-wise vector inequalities. It means that each row of the matrix <img src="svgs/b5087617bd5bed26b1da99fefb5353f1.svg" align=middle width=23.50114799999999pt height=22.465723500000017pt/> represents an inequality that must be satisfied.</p>
  
 To use the CVXOPT convex solver API. The Wolfe dual soft margin formula is re-written as follows
 
-\begin{align}
- 	\min_{\alpha} & \frac{1}{2} \alpha^T (yy^T G) \alpha -1^T \alpha.  \nonumber  \\
-    \text{s.t. } &-\alpha_n  \preccurlyeq 0,					\nonumber  \\
-    \text{and s.t. }    & y \cdot \alpha = 0. 					\nonumber
-\end{align}
+<p align="center"><img src="svgs/a364906d0854671fe9b9718ce4ce1ec3.svg" align=middle width=212.12443724999997pt height=81.45851505pt/></p>
 
 Where 
 <br>
-G is a Gram matrix of all possible dot products of vectors $x_n$.
+<p>G is a Gram matrix of all possible dot products of vectors <img src="svgs/d7084ce258ffe96f77e4f3647b250bbf.svg" align=middle width=17.521011749999992pt height=14.15524440000002pt/>.</p>
 
-$$
-
-G(x_n,...x_N)=
-  \begin{bmatrix}
-    x_1 \cdot x_1 & x_1 \cdot x_2& \dots & x_1 \cdot x_N 	\\
-    x_2 \cdot x_1 & x_2 \cdot x_2& \dots & x_2 \cdot x_N 	\\
-	\vdots        & \vdots       & \ddots& \vdots 			\\
-	x_N \cdot x_1 & x_N \cdot x_2& \dots & x_N \cdot x_N 	\\
-  \end{bmatrix}
-
-$$
+<p align="center"><img src="svgs/5ceca286e4d3c1cb407465d5db863df5.svg" align=middle width=357.85148685pt height=88.76800184999999pt/></p>
 
 \begin{align}
 	P:&= (yy^T G) \text{ matrix of size $N \times N$.}    									\nonumber\\
 	q:&= -1^T 	\text{ a vector of size $N \times 1$.}										    \nonumber\\
-	G:&= -diag[1] \text{ a diagonal matrix of -1 of size $N\times N$.}   						\nonumber\\
+	\mathcal{G}:&= -diag[1] \text{ a diagonal matrix of -1 of size $N\times N$.}   						\nonumber\\
 	h:&= \overrightarrow{0} \text{ a vector of zeros of size $N \times 1$}   					\nonumber\\
 	A:&= y \text{ label vector of size $N \times 1$.}   										\nonumber\\
 	b:&= 0 \text{ a scalar}.
@@ -127,12 +165,17 @@ Finished
 
 <h3>Highlights</h3>
 <ul style="list-style-type:disc">
-<li></li>
+<li>SVMs are particularly well-suited for classification of complex but small- or medium-sized linear and non-linearably separable datasets.</li>
+<li>The SKLearn SVC class is based on the libsvm library, which implements an algorithm that supports the kernel trick. The training time complexity is usually between $O(m^2 \times n)$ and $O(m^3 \times n)$. This means that training becomes slow when the number of training instances are large.</li>
+<li>Support Vector Machines in Machine Learning generally follow <p><a href="https://github.com/DrIanGregory/MachineLearning-LogisticRegressionWithGradientDescentOrNewton">Logistic regression</a> in studies. This work is a natural stepping stone and advances the candidates Machine Learning knowledge from this step as follows:</li>
+	<ul style="list-style-type:disc">
+		<li>Strong introduction to vectors and vector operations.</li>
+		<li>Appreciation and usage of advanced optimisation routines such as convex optimisation and Sequential Minimal Optimization (SMO).</li>
+	</ul>
 </ul>
 
 <h3>Requirements</h3>
-<p><a href="https://www.python.org/">Python (>2.7)</a>, <a href="http://www.numpy.org/">Numpy</a>,<a href="https://cvxopt.org/">CVXOPT</a>,<a href="https://scikit-learn.org">sklearn</a> and <a href="https://matplotlib.org/">matplotlib</a>.</p>
- 
+<p><a href="https://www.python.org/">Python (>2.7)</a>, <a href="http://www.numpy.org/">Numpy</a>, <a href="https://cvxopt.org/">CVXOPT</a>, <a href="https://scikit-learn.org">sklearn</a> and <a href="https://matplotlib.org/">matplotlib</a>.</p>
 
 
 
