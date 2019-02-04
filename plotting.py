@@ -83,9 +83,9 @@ class Plotting(object):
         plt.plot(X1[:, 0], X1[:, 1], marker='x',markersize=5, color='lightblue',linestyle='none')
         plt.plot(X2[:, 0], X2[:, 1], marker='o',markersize=4, color='darkorange',linestyle='none')
         if objFit.fit_type != 'sklearn':
-            plt.scatter(objFit.sv[:, 0], objFit.sv[:, 1], s=60, color="blue")   # The points desginating the support vectors.
+            plt.scatter(objFit.sv[:, 0], objFit.sv[:, 1], s=60, color="blue")   # The points designating the support vectors.
         if objFit.fit_type == 'sklearn':
-            plt.scatter(objFit.support_vectors_[:, 0], objFit.support_vectors_[:, 1], s=60, color="blue")   # The points desginating the support vectors.
+            plt.scatter(objFit.support_vectors_[:, 0], objFit.support_vectors_[:, 1], s=60, color="blue")   # The points designating the support vectors.
 
         if objFit.fit_type == 'sklearn' or objFit.kernel  == 'polynomial' or objFit.kernel  == 'gaussian':
             # Non-linear margin line needs to be generated. Will use a contour plot.

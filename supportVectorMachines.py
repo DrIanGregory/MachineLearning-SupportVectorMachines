@@ -10,19 +10,7 @@ from sklearn.svm import SVC
 import plotting
 import datageneration
 
-def linear_kernel(x1, x2):
-    return np.dot(x1, x2)
 
-def polynomial_kernel(x, y,C=1, d=3):
-    # Inputs:
-    #   x   : vector of x data.
-    #   y   : vector of y data.
-    #   c   : is a constant
-    #   d   : is the order of the polynomial.
-    return (np.dot(x, y) + C) ** d
-
-def gaussian_kernel(x, y, gamma=0.5):
-    return np.exp(-gamma*linalg.norm(x - y) ** 2 )
 
 
 class SVM(object):
@@ -45,6 +33,19 @@ class SVM(object):
         self.degree = degree
         self.kernel = kernel
 
+    def linear_kernel(self, x1, x2):
+        return np.dot(x1, x2)
+
+    def polynomial_kernel(self, x, y,C=1, d=3):
+        # Inputs:
+        #   x   : vector of x data.
+        #   y   : vector of y data.
+        #   c   : is a constant
+        #   d   : is the order of the polynomial.
+        return (np.dot(x, y) + C) ** d
+
+    def gaussian_kernel(self, x, y, gamma=0.5):
+        return np.exp(-gamma*linalg.norm(x - y) ** 2 )
 
     def fit(self, X, y):
         n_samples, n_features = X.shape
@@ -56,12 +57,12 @@ class SVM(object):
 
                 # Kernel trick.
                 if self.kernel == 'linear':
-                    K[i, j] = linear_kernel(X[i], X[j])
+                    K[i, j] = self.linear_kernel(X[i], X[j])
                 if self.kernel=='gaussian':
-                    K[i, j] = gaussian_kernel(X[i], X[j], self.gamma)   # Kernel trick.
+                    K[i, j] = self.gaussian_kernel(X[i], X[j], self.gamma)   # Kernel trick.
                     self.C = None   # Not used in gaussian kernel.
                 if self.kernel == 'polynomial':
-                    K[i, j] = polynomial_kernel(X[i], X[j], self.C, self.degree)
+                    K[i, j] = self.polynomial_kernel(X[i], X[j], self.C, self.degree)
 
 
         # Converting into cvxopt format:
@@ -92,55 +93,58 @@ class SVM(object):
         solution = cvxopt.solvers.qp(P, q, G, h, A, b)
 
         # Lagrange multipliers
-        a = np.ravel(solution['x'])
+        alphas = np.ravel(solution['x'])        # Flatten the matrix into a vector of all the Langrangian multipliers.
 
         # Support vectors have non zero lagrange multipliers
-        sv = a > 1e-5
-        ind = np.arange(len(a))[sv]
-        self.a = a[sv]
+        sv = alphas > 1e-5
+        ind = np.arange(len(alphas))[sv]
+        self.alphas = alphas[sv]
         self.sv = X[sv]
         self.sv_y = y[sv]
 
-        # Intercept
+        # Bias (For linear it is the intercept):
         self.b = 0
-        for n in range(len(self.a)):
+        for n in range(len(self.alphas)):
+            # For all support vectors:
             self.b += self.sv_y[n]
-            self.b -= np.sum(self.a * self.sv_y * K[ind[n], sv])
-        self.b /= len(self.a)
+            self.b -= np.sum(self.alphas * self.sv_y * K[ind[n], sv])
+        self.b = self.b / len(self.alphas)
 
         # Weight vector
         if self.kernel == 'linear':
             self.w = np.zeros(n_features)
             for n in range(len(self.a)):
-                self.w += self.a[n] * self.sv_y[n] * self.sv[n]
+                self.w += self.alphas[n] * self.sv_y[n] * self.sv[n]
         else:
             self.w = None
 
     def project(self, X):
+        # Create the decision boundary for the plots. Calculates the hypothesis.
         if self.w is not None:
             return np.dot(X, self.w) + self.b
         else:
             y_predict = np.zeros(len(X))
             for i in range(len(X)):
                 s = 0
-                for a, sv_y, sv in zip(self.a, self.sv_y, self.sv):
-                    #s += a * sv_y * self.kernel(X[i], sv)
+                for a, sv_y, sv in zip(self.alphas, self.sv_y, self.sv):
+                    # a : Lagrange multipliers, sv : support vectors.
+                    # Hypothesis: sign(sum^S a * y * kernel + b)
 
                     if self.kernel == 'linear':
-                        s += a * sv_y * linear_kernel(X[i], sv)
+                        s += a * sv_y * self.linear_kernel(X[i], sv)
                     if self.kernel=='gaussian':
-                        s += a * sv_y * gaussian_kernel(X[i], sv, self.gamma)   # Kernel trick.
+                        s += a * sv_y * self.gaussian_kernel(X[i], sv, self.gamma)   # Kernel trick.
                         self.C = None   # Not used in gaussian kernel.
                     if self.kernel == 'polynomial':
-                        s += a * sv_y * polynomial_kernel(X[i], sv, self.C, self.degree)
+                        s += a * sv_y * self.polynomial_kernel(X[i], sv, self.C, self.degree)
 
                 y_predict[i] = s
             return y_predict + self.b
 
     def predict(self, X):
+        # Hypothesis: sign(sum^S a * y * kernel + b).
+        # NOTE: The sign function returns -1 if x < 0, 0 if x==0, 1 if x > 0.
         return np.sign(self.project(X))
-
-
 
 
 def formattedOutput(objFit):
@@ -242,14 +246,14 @@ def run_sklearn_svm(kernel='linear', C='auto', gamma='auto', degree='auto'):
 
 
 if __name__ == "__main__":
-    run_custom_svm(kernel='linear')
-    #run_custom_svm(kernel='linear',C=100)
-    #run_custom_svm('polynomial',C=1, degree=3)
-    #run_custom_svm('gaussian', gamma=0.5)
+    # run_custom_svm(kernel='linear')
+    # run_custom_svm(kernel='linear',C=100)
+    run_custom_svm('polynomial',C=1, degree=3)
+    # run_custom_svm('gaussian', gamma=0.5)
     #
     #run_sklearn_svm(kernel='linear', C=10)          # Hard Margin
-    #run_sklearn_svm(kernel='linear', C=100)         # Soft Margin
-    run_sklearn_svm(kernel='poly', C=1, degree=3,gamma=1)
-    #run_sklearn_svm(kernel ='rbf', gamma='auto')
+    # run_sklearn_svm(kernel='linear', C=100)         # Soft Margin
+    # run_sklearn_svm(kernel='poly', C=1, degree=3,gamma=1)
+    # run_sklearn_svm(kernel ='rbf', gamma='auto')
 
     print("Finished")
