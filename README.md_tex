@@ -66,32 +66,28 @@
 </table
 <h3>Given two classes of labelled examples, we are interested in finding a decision boundary resulting from an appropriate choice of support vectors.</h3>
  
- 
+<ul style="list-style-type:disc"> 
 <h3>Model</h3>
-<p>Simulate labelled training dataset <img src="svgs/4388ea036963a2791929a7365e301c7a.svg" align=middle width=294.09701144999997pt height=27.91243950000002pt/> where there are N couples of <img src="svgs/81fe5e49971b8fdc94a28f66e9310309.svg" align=middle width=55.44161204999999pt height=24.65753399999998pt/> and k is the number (dimension) of x variables.</p>
-<br>
-We are interested in SVM disrimitive analysis by finding the optimum decision boundary resulting from a choice of S support vectors.
+<li><p>Simulate labelled training dataset <img src="svgs/4388ea036963a2791929a7365e301c7a.svg" align=middle width=294.09701144999997pt height=27.91243950000002pt/> where there are N couples of <img src="svgs/81fe5e49971b8fdc94a28f66e9310309.svg" align=middle width=55.44161204999999pt height=24.65753399999998pt/> and k is the number (dimension) of x variables.</p></li>
+<li>We are interested in SVM disrimitive analysis by finding the optimum decision boundary resulting from a choice of S support vectors.
 This SVM optimization problem is a constrained convex quadratic optimization problem. 
 Meaning it can be formulated in terms of Lagrange multipliers.
 For the Lagrange multipliers to be applied under constraints, can use the Wolfe Dual Principle which 
 is appropriate as long as the Karush Kuhn Tucker (KKT) conditions are satisfied.
-Further, as this is a convex problem, Slater’s condition tells us that strong duality holds such that the dual and primal optimums give the solution.
-
+Further, as this is a convex problem, Slater’s condition tells us that strong duality holds such that the dual and primal optimums give the solution.</li>
 A benefit to this dual formulation is that the objective function only depends on the Lagrange multipliers (weights and intercept drop out).
 Further, this formulation will be useful when requiring Kernals for entangled data sets.
-<br>
-The Wolfe dual soft margin formula with kernel is given by
+
+<li>The Wolfe dual soft margin formula with kernel is given by
 
 <p align="center"><img src="svgs/0acbd9783d20c53d1e9f750f2665520d.svg" align=middle width=333.89845664999996pt height=131.37932775pt/></p>
 
 Where
 <p><img src="svgs/c745b9b57c145ec5577b82542b2df546.svg" align=middle width=10.57650494999999pt height=14.15524440000002pt/> are the Lagrange multipliers, <img src="svgs/39ae080f4ae6ef7bda6a0ca0c44efc78.svg" align=middle width=32.48865674999999pt height=24.65753399999998pt/> is the kernel function, N are the number of training 
 samples in the dataset, x is the matrix of training samples, y is the vector of target values, C is a supplied hyperparameter.</p>
-<br>
-<br>
-The non-zero Lagrange multipliers are the data points which contribute to the formation of the decision boundary.
-<br>
-<p>The hypothesis function <img src="svgs/4dd763dd7876885c2e5131a0b6d62d57.svg" align=middle width=133.02135495pt height=24.65753399999998pt/> is the decision boundary. The hypothesis formula in terms of the Kernel function is given by:</p>
+</li>
+<li>The non-zero Lagrange multipliers are the data points which contribute to the formation of the decision boundary.
+<p>The hypothesis function <img src="svgs/4dd763dd7876885c2e5131a0b6d62d57.svg" align=middle width=133.02135495pt height=24.65753399999998pt/> is the decision boundary. The hypothesis formula in terms of the Kernel function is given by:</p></li>
 
 <p align="center"><img src="svgs/554a33df7742aebf76ec7b81f6f3c17a.svg" align=middle width=283.76643075pt height=49.315569599999996pt/></p>
 <p>Where S is the set of support vectors, <img src="svgs/c745b9b57c145ec5577b82542b2df546.svg" align=middle width=10.57650494999999pt height=14.15524440000002pt/> is the Lagrange multiplier, b is the bias term, y is the target from the examples, <img src="svgs/39ae080f4ae6ef7bda6a0ca0c44efc78.svg" align=middle width=32.48865674999999pt height=24.65753399999998pt/> is the Kernel and</p>
@@ -100,9 +96,9 @@ The non-zero Lagrange multipliers are the data points which contribute to the fo
 
 
 <h4>Linear Kernel</h4>
-Applies to linearly separable data in the <img src="svgs/433badc501d4f8a183b14684b47f305e.svg" align=middle width=18.424726649999986pt height=26.76175259999998pt/> space. When the constraint C is zero. The data must be completely linearly separable and the decision boundary is referred to as 'hard margin'.
-<br> 
-When the parameter C is non-zero, the approach allows for some overlap in the data and the decision boundary is referred to as 'soft-margin'.
+<li><p>Applies to linearly separable data in the <img src="svgs/433badc501d4f8a183b14684b47f305e.svg" align=middle width=18.424726649999986pt height=26.76175259999998pt/> space.</p></p>
+<li>When the constraint C is zero. The data must be completely linearly separable and the decision boundary is referred to as <em>'hard margin'</em>.</li>
+<li>When the parameter C is non-zero, the approach allows for some overlap in the data and the decision boundary is referred to as <em>'soft-margin'</em>.</li>
 
 
 <p align="center"><img src="svgs/3229be5d1587352e6b4dddbb725a2468.svg" align=middle width=114.9997167pt height=17.2895712pt/></p>
@@ -179,8 +175,10 @@ Finished
 	<ul style="list-style-type:disc">
 		<li>Strong introduction to vectors and vector operations.</li>
 		<li>Appreciation and usage of advanced optimisation routines such as convex optimisation and Sequential Minimal Optimization (SMO).</li>
+		<li>SKLearn implements SVM optimisation using LIBSVM which utilises an SMO routine.</li>
 	</ul>
 </ul>
 
 <h3>Requirements</h3>
 <p><a href="https://www.python.org/">Python (>2.7)</a>, <a href="http://www.numpy.org/">Numpy</a>, <a href="https://cvxopt.org/">CVXOPT</a>, <a href="https://scikit-learn.org">sklearn</a> and <a href="https://matplotlib.org/">matplotlib</a>.</p>
+</ul>

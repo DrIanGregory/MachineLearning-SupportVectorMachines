@@ -113,7 +113,7 @@ class SVM(object):
         # Weight vector
         if self.kernel == 'linear':
             self.w = np.zeros(n_features)
-            for n in range(len(self.a)):
+            for n in range(len(self.alphas)):
                 self.w += self.alphas[n] * self.sv_y[n] * self.sv[n]
         else:
             self.w = None
@@ -246,14 +246,14 @@ def run_sklearn_svm(kernel='linear', C='auto', gamma='auto', degree='auto'):
 
 
 if __name__ == "__main__":
-    # run_custom_svm(kernel='linear')
-    # run_custom_svm(kernel='linear',C=100)
+    run_custom_svm(kernel='linear')
+    run_custom_svm(kernel='linear',C=100)
     run_custom_svm('polynomial',C=1, degree=3)
-    # run_custom_svm('gaussian', gamma=0.5)
-    #
-    #run_sklearn_svm(kernel='linear', C=10)          # Hard Margin
-    # run_sklearn_svm(kernel='linear', C=100)         # Soft Margin
-    # run_sklearn_svm(kernel='poly', C=1, degree=3,gamma=1)
-    # run_sklearn_svm(kernel ='rbf', gamma='auto')
+    run_custom_svm('gaussian', gamma=0.5)
+
+    run_sklearn_svm(kernel='linear', C=10)          # Hard Margin
+    run_sklearn_svm(kernel='linear', C=100)         # Soft Margin
+    run_sklearn_svm(kernel='poly', C=1, degree=3,gamma=1)
+    run_sklearn_svm(kernel ='rbf', gamma='auto')
 
     print("Finished")
