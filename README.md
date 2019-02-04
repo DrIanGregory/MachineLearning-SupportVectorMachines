@@ -64,7 +64,6 @@
   
   
 </table
-
 <h3>Given two classes of labelled examples, we are interested in finding a decision boundary resulting from an appropriate choice of support vectors.</h3>
  
  
@@ -80,15 +79,15 @@ Further, as this is a convex problem, Slater’s condition tells us that strong 
 
 A benefit to this dual formulation is that the objective function only depends on the Lagrange multipliers (weights and intercept drop out).
 Further, this formulation will be useful when requiring Kernals for entangled data sets.
-
 <br>
 The Wolfe dual soft margin formula with kernel is given by
 
 <p align="center"><img src="svgs/0acbd9783d20c53d1e9f750f2665520d.svg" align=middle width=333.89845664999996pt height=131.37932775pt/></p>
 
 Where
-<img src="svgs/c745b9b57c145ec5577b82542b2df546.svg" align=middle width=10.57650494999999pt height=14.15524440000002pt/> are the Lagrange multipliers, <img src="svgs/39ae080f4ae6ef7bda6a0ca0c44efc78.svg" align=middle width=32.48865674999999pt height=24.65753399999998pt/> is the kernel function, N are the number of training 
-samples in the dataset, x is the matrix of training samples, y is the vector of target values, C is a supplied hyperparameter.
+<p><img src="svgs/c745b9b57c145ec5577b82542b2df546.svg" align=middle width=10.57650494999999pt height=14.15524440000002pt/> are the Lagrange multipliers, <img src="svgs/39ae080f4ae6ef7bda6a0ca0c44efc78.svg" align=middle width=32.48865674999999pt height=24.65753399999998pt/> is the kernel function, N are the number of training 
+samples in the dataset, x is the matrix of training samples, y is the vector of target values, C is a supplied hyperparameter.</p>
+<br>
 <br>
 The non-zero Lagrange multipliers are the data points which contribute to the formation of the decision boundary.
 <br>
@@ -110,12 +109,12 @@ When the parameter C is non-zero, the approach allows for some overlap in the da
 Where x and x' are two vectors.
 
 <h4>Polynomial Kernel</h4>
-Applies to non-linearly separable data in <img src="svgs/d03c1e146df015e061405cc425738d83.svg" align=middle width=18.424726649999986pt height=26.76175259999998pt/> space.
+<p>Applies to non-linearly separable data in <img src="svgs/d03c1e146df015e061405cc425738d83.svg" align=middle width=18.424726649999986pt height=26.76175259999998pt/> space.</p>
 <p align="center"><img src="svgs/130c930cf5becce140bc3628f8d6d787.svg" align=middle width=168.4659702pt height=18.88772655pt/></p>
 Where C is a constant and d is the degree of the kernel.
 
 <h4>Gaussian Kernel (aka Radial Basis Function (RBF)) </h4>
-Applies to non-linearly separable data in <img src="svgs/10f7fa8e298ae7f4ae46881a2d466c68.svg" align=middle width=78.35261279999999pt height=22.831056599999986pt/> space.
+<p>Applies to non-linearly separable data in <img src="svgs/7d8f6ef7574d1ebbafb8c1f734d24b6e.svg" align=middle width=24.97726109999999pt height=22.648391699999998pt/>. space.</p?
 <p align="center"><img src="svgs/427b753bc670d106e67a2c8c5e77febf.svg" align=middle width=213.56621055pt height=21.1544223pt/></p>
 <p>Where <img src="svgs/243cf87857232b4de4bc600c26d9d7cb.svg" align=middle width=22.20931349999999pt height=19.1781018pt/> is a free scalar parameter chosen based on the data and defines the influence of each training example.</p>
 
@@ -123,7 +122,7 @@ Applies to non-linearly separable data in <img src="svgs/10f7fa8e298ae7f4ae46881
 <h3>CVXOPT Library</h3>
 The CVXOPT library solves the Wolfe dual soft margin constrained optimisation with the following API:
  
-<p align="center"><img src="svgs/d565e94db6332fcd8630e1a1b7124842.svg" align=middle width=418.849332pt height=78.26216475pt/></p>
+<p align="center"><img src="svgs/d815dd2e1e10d79a7162f6fe778314f4.svg" align=middle width=137.42467695pt height=78.26216475pt/></p>
 <p>Note: <img src="svgs/ceddacf03a28d83100c38150c1076c1f.svg" align=middle width=12.785434199999989pt height=20.931464400000007pt/> indicates component-wise vector inequalities. It means that each row of the matrix <img src="svgs/b5087617bd5bed26b1da99fefb5353f1.svg" align=middle width=23.50114799999999pt height=22.465723500000017pt/> represents an inequality that must be satisfied.</p>
  
 To use the CVXOPT convex solver API. The Wolfe dual soft margin formula is re-written as follows
@@ -136,7 +135,7 @@ Where
 
 <p align="center"><img src="svgs/5ceca286e4d3c1cb407465d5db863df5.svg" align=middle width=357.85148685pt height=88.76800184999999pt/></p>
 
-<p align="center"><img src="svgs/16b8fb94fbe802edf3115d58735da690.svg" align=middle width=543.22929045pt height=148.99362225pt/></p>
+<p align="center"><img src="svgs/ceeaf43e7d8f6cde00a8a21441244b9f.svg" align=middle width=386.18483804999994pt height=144.88403325pt/></p>
 
  
 <h3>How to use</h3>
@@ -185,6 +184,3 @@ Finished
 
 <h3>Requirements</h3>
 <p><a href="https://www.python.org/">Python (>2.7)</a>, <a href="http://www.numpy.org/">Numpy</a>, <a href="https://cvxopt.org/">CVXOPT</a>, <a href="https://scikit-learn.org">sklearn</a> and <a href="https://matplotlib.org/">matplotlib</a>.</p>
-
-
-
