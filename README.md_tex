@@ -19,11 +19,11 @@
   <tr>	  
     <th>
 	    <h5><center>Hard Margin</center></h5><br>
-	    <img src="/SupportVectorMachinesCustomLibraryLinearHardMargin.png" width="425" alt="Linear SVM hard margin. Using custom library."/>
+	    <img src="images/SupportVectorMachinesCustomLibraryLinearHardMargin.png" width="425" alt="Linear SVM hard margin. Using custom library."/>
 	  </th>
     <th>
 	    <h5><center>Hard Margin</center></h5><br>
-	    <img src="/SupportVectorMachinesSklearnLibraryLinearHardMargin.png" width="425"alt="Linear SVM hard margin. Using SKLearn."/>
+	    <img src="images/SupportVectorMachinesSklearnLibraryLinearHardMargin.png" width="425"alt="Linear SVM hard margin. Using SKLearn."/>
 	  </th>
   </tr>	
   
@@ -31,11 +31,11 @@
   <tr>	
     <th>
 	    <h5><center>Soft Margin</center></h5><br>
-	    <img src="/SupportVectorMachinesCustomLibraryLinearSoftMargin.png" width="400" alt="Linear SVM soft margin."/>
+	    <img src="images/SupportVectorMachinesCustomLibraryLinearSoftMargin.png" width="400" alt="Linear SVM soft margin."/>
 	</th>
     <th>
 	    <h5><center>Soft Margin</center></h5><br>
-	    <img src="/SupportVectorMachinesSklearnLibraryLinearSoftMargin.png" width="400"alt="Linear SVM soft margin."/>
+	    <img src="images/SupportVectorMachinesSklearnLibraryLinearSoftMargin.png" width="400"alt="Linear SVM soft margin."/>
 	</th>
   </tr>	
   
@@ -43,22 +43,22 @@
   <tr>
     <th>
 	    <h5><center>Polynomial Kernel</center></h5><br>
-	    <img src="/SupportVectorMachinesCustomLibraryPolynomial.png" width="400" alt="Polynomial SVM. Custom library."/>
+	    <img src="images/SupportVectorMachinesCustomLibraryPolynomial.png" width="400" alt="Polynomial SVM. Custom library."/>
 	</th>
     <th>
 	    <h5><center>Polynomial Kernel</center></h5><br>
-	    <img src="/SupportVectorMachinesSklearnLibraryPolynomialMargin.png" width="400"alt="Polynomial SVM. Using SKLearn."/>
+	    <img src="images/SupportVectorMachinesSklearnLibraryPolynomialMargin.png" width="400"alt="Polynomial SVM. Using SKLearn."/>
 	</th>
   </tr>	
   
   <tr>
     <th>
 	    <h5><center>Gaussian Kernel</center></h5><br>
-	    <img src="/SupportVectorMachinesCustomLibraryGaussianMargin.png" width="400" alt="Gaussian SVM. Custom library."/>
+	    <img src="images/SupportVectorMachinesCustomLibraryGaussianMargin.png" width="400" alt="Gaussian SVM. Custom library."/>
 	</th>
     <th>
 	    <h5><center>Gaussian Kernel</center></h5><br>
-	    <img src="/SupportVectorMachinesSklearnLibraryGaussianMargin.png" width="400"alt="Gaussian SVM. Using SKLearn."/>
+	    <img src="images/SupportVectorMachinesSklearnLibraryGaussianMargin.png" width="400"alt="Gaussian SVM. Using SKLearn."/>
 	</th>
   </tr>	
   
