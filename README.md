@@ -1,3 +1,5 @@
+<img src="test.svg" align=middle width=18.424726649999986pt height=26.76175259999998pt/> space.
+
 <h2>Machine Learning-Support Vector Machines</h2>
 <h3>Description:</h3>
 <ul style="list-style-type:disc">
@@ -135,9 +137,9 @@ Where
 
  
 <h3>How to use</h3>
-##
-	python supportVectorMachines.py
-
+<pre>
+python supportVectorMachines.py
+</pre>
 		
 		
 <h3>Expected Output</h3>
