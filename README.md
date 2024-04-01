@@ -11,9 +11,6 @@
 </ul>
 </ul>
 
-<img src="test.svg" align=middle width=18.424726649999986pt height=26.76175259999998pt/> space.
-
-<img src="test.svg" align=middle width=418.424726649999986pt height=426.76175259999998pt/> space.
 
 
 <table style="max-width:100%;white-space:nowrap;">
@@ -140,9 +137,9 @@ Where
 
  
 <h3>How to use</h3>
-<pre>
-python supportVectorMachines.py
-</pre>
+
+##
+	python supportVectorMachines.py
 		
 		
 <h3>Expected Output</h3>
