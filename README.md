@@ -1,4 +1,4 @@
-<img src="test.svg" align=middle width=18.424726649999986pt height=26.76175259999998pt/> space.
+
 
 <h2>Machine Learning-Support Vector Machines</h2>
 <h3>Description:</h3>
@@ -11,6 +11,9 @@
 </ul>
 </ul>
 
+<img src="test.svg" align=middle width=18.424726649999986pt height=26.76175259999998pt/> space.
+
+<img src="test.svg" align=middle width=418.424726649999986pt height=426.76175259999998pt/> space.
 
 
 <table style="max-width:100%;white-space:nowrap;">
