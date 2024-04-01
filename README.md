@@ -135,9 +135,9 @@ Where
 
  
 <h3>How to use</h3>
-<pre>
-python supportVectorMachines.py
-</pre>
+##
+	python supportVectorMachines.py
+
 		
 		
 <h3>Expected Output</h3>
