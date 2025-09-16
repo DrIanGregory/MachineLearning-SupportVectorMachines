@@ -5,7 +5,9 @@
     }
   }
 </style>  
-  
+html {
+    filter: grayscale(0.75) invert(1) contrast(1);
+}
 
 <h2>Machine Learning-Support Vector Machines</h2>
 <h3>Description:</h3>
