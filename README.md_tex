@@ -1,3 +1,12 @@
+<style>
+ @media (prefers-color-scheme: dark) {
+    .spinner {
+      filter: invert(1) brightness(2);
+    }
+  }
+</style>  
+  
+
 <h2>Machine Learning-Support Vector Machines</h2>
 <h3>Description:</h3>
 <ul style="list-style-type:disc">
@@ -68,7 +77,7 @@
  
 <ul style="list-style-type:disc"> 
 <h3>Model</h3>
-<li><p>Simulate labelled training dataset <img src="svgs/4388ea036963a2791929a7365e301c7a.svg?invert_in_darkmode" align=middle width=294.09701144999997pt height=27.91243950000002pt/> where there are N couples of <img src="svgs/81fe5e49971b8fdc94a28f66e9310309.svg" align=middle width=55.44161204999999pt height=24.65753399999998pt/> and k is the number (dimension) of x variables.</p></li>
+<li><p>Simulate labelled training dataset <img src="svgs/4388ea036963a2791929a7365e301c7a.svg" align=middle width=294.09701144999997pt height=27.91243950000002pt/> where there are N couples of <img src="svgs/81fe5e49971b8fdc94a28f66e9310309.svg" align=middle width=55.44161204999999pt height=24.65753399999998pt/> and k is the number (dimension) of x variables.</p></li>
 <li>We are interested in SVM disrimitive analysis by finding the optimum decision boundary resulting from a choice of S support vectors.
 This SVM optimization problem is a constrained convex quadratic optimization problem. 
 Meaning it can be formulated in terms of Lagrange multipliers.
@@ -80,7 +89,7 @@ Further, this formulation will be useful when requiring Kernals for entangled da
 
 <li>The Wolfe dual soft margin formula with kernel is given by
 
-<p align="center"><img src="svgs/0acbd9783d20c53d1e9f750f2665520d.svg" align=middle width=333.89845664999996pt height=131.37932775pt/></p>
+<p align="center"><img class="spinner" src="svgs/0acbd9783d20c53d1e9f750f2665520d.svg" align=middle width=333.89845664999996pt height=131.37932775pt/></p>
 
 Where
 <p><img src="svgs/c745b9b57c145ec5577b82542b2df546.svg" align=middle width=10.57650494999999pt height=14.15524440000002pt/> are the Lagrange multipliers, <img src="svgs/39ae080f4ae6ef7bda6a0ca0c44efc78.svg" align=middle width=32.48865674999999pt height=24.65753399999998pt/> is the kernel function, N are the number of training 
