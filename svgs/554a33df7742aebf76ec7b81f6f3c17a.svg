@@ -10,6 +10,19 @@
         fill: #FF0000; /* Fill color for dark mode */
       }
     }
+	
+	
+  <style>
+    path {
+    fill: green;
+    }
+    @media (prefers-color-scheme: dark) {
+    path {
+    fill: orange;
+    }
+    }
+  </style>
+  
   </style>
   
 <ns0:defs>
