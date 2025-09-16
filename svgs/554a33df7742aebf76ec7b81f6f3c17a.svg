@@ -2,12 +2,12 @@
 
   <style>
     .my-icon {
-      fill: #000000; /* Default fill color for light mode */
+      fill: #0000FF; /* Default fill color for light mode */
     }
 
     @media (prefers-color-scheme: dark) {
       .my-icon {
-        fill: #ffffff; /* Fill color for dark mode */
+        fill: #FF0000; /* Fill color for dark mode */
       }
     }
   </style>
